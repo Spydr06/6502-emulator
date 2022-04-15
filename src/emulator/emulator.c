@@ -10,7 +10,7 @@ void emulate(BUS* bus)
 bool emulate_op(BUS* bus)
 {
     uint16_t addr = bus->cpu.pc;
-    uint8_t instr = bus->ram.bytes[addr];
+    uint8_t instr = read_bus(bus, addr);
 
     bus->cpu.pc += INSTR_LEN[instr];
     bus->cpu.cycles = INSTR_CYCLES[instr];
@@ -21,13 +21,13 @@ bool emulate_op(BUS* bus)
         break;
 
     case JMP_ABS:
-        bus->cpu.pc = bus->ram.bytes[addr + 1] | bus->ram.bytes[addr + 2] << 8;
+        bus->cpu.pc = read_bus(bus, addr + 1) | read_bus(bus, addr + 2) << 8;
         break;
 
     case JMP_IND:
-        bus->cpu.pc = bus->ram.bytes[
-            bus->ram.bytes[addr + 1] | bus->ram.bytes[addr + 2] << 8
-        ];
+        bus->cpu.pc = read_bus(bus,
+            read_bus(bus, addr + 1) | read_bus(bus, addr + 2) << 8
+        );
         break;
 
     case INX:

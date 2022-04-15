@@ -43,22 +43,5 @@ typedef struct {
     uint64_t cycles;
 } CPU;
 
-typedef enum {
-    ADDR_MODE_IMP,
-    ADDR_MODE_ACC,
-    ADDR_MODE_IMM,
-    ADDR_MODE_IND_JMP,
-    ADDR_MODE_REL,
-    ADDR_MODE_ABS,
-    ADDR_MODE_ABS_JMP,
-    ADDR_MODE_ZP,
-    ADDR_MODE_ZP_IND_X,
-    ADDR_MODE_ZP_IND_Y,
-    ADDR_MODE_ABS_X,
-    ADDR_MODE_ABS_Y,
-    ADDR_MODE_IND_X,
-    ADDR_MODE_IND_Y
-} AddressMode;
-
 void init_cpu(CPU* cpu);
 void dump_cpu_state(FILE* file, CPU* cpu);
