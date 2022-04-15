@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stdio.h>
 
 typedef struct {
     uint16_t pc; // Program counter
@@ -57,3 +58,4 @@ typedef enum {
 } AddressMode;
 
 void init_cpu(CPU* cpu);
+void dump_cpu_state(FILE* file, CPU* cpu);

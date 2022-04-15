@@ -35,7 +35,7 @@ enum {
     JSR, // jump subroutine
     LDY, // load Y
     LDX, // load X
-    NOP, // no operation
+    NOP = 0xEA, // no operation
     LSR, // logical shift right
     PHA, // push accumulator
     ORA, // or with accumulator
@@ -64,4 +64,4 @@ enum {
 };
 
 extern uint8_t INSTR_LEN[INSTR_LAST - 1];
-extern uint8_t INSTR_TIME[INSTR_LAST - 1];
+extern uint8_t INSTR_CYCLES[INSTR_LAST - 1];

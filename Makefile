@@ -1,6 +1,6 @@
 CC := gcc
 LD := gcc
-CFLAGS  := -Wall -Wextra -Werror
+CFLAGS  := -Wall -Wextra
 LDFLAGS := -lm
 
 PROG := bin/6502-emu

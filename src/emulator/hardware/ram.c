@@ -8,11 +8,21 @@ void init_ram(RAM* ram)
 
 void hexdump(FILE* file, RAM *ram)
 {
-    for(uint32_t i = 0; i < RAM_SIZE; i += 16)
-        fprintf(file, "%x: %x%x %x%x %x%x %x%x %x%x %x%x %x%x %x%x\n", i, 
+    fprintf(file, "RAM:\n");
+    for(uint32_t i = 0; i < RAM_SIZE; i += 8)
+    {
+        uint8_t null[8] = {};
+        uint16_t start = i;
+        while(!memcmp(&ram->bytes[i], null, 8) && i < RAM_SIZE) 
+            i += 8;
+        fprintf(file, "  0x%04x - 0x%04x: 00\n", start, i);
+        
+        if(i >= RAM_SIZE) 
+            break;
+        
+        fprintf(file, "  0x%04x: %02X %02X %02X %02X %02X %02X %02X %02X\n", i, 
             ram->bytes[i + 0], ram->bytes[i + 1], ram->bytes[i + 2], ram->bytes[i + 3],
-            ram->bytes[i + 4], ram->bytes[i + 5], ram->bytes[i + 6], ram->bytes[i + 7],
-            ram->bytes[i + 8], ram->bytes[i + 9], ram->bytes[i + 10], ram->bytes[i + 11],
-            ram->bytes[i + 12], ram->bytes[i + 13], ram->bytes[i + 14], ram->bytes[i + 15]
+            ram->bytes[i + 4], ram->bytes[i + 5], ram->bytes[i + 6], ram->bytes[i + 7]
         );
+    }
 }
