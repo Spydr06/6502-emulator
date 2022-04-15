@@ -1,5 +1,6 @@
 #pragma once
 #include "hardware/bus.h"
+#include <stdbool.h>
 
 void emulate(BUS* system);
-void emulate_op(BUS* bus, uint16_t addr);
+bool emulate_op(BUS* bus);

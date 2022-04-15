@@ -29,7 +29,8 @@ enum {
     DEY, // decrement Y
     INX, // increment X
     INC, // increment
-    JMP, // jump
+    JMP_ABS = 0x4C, // jump (absolute mode)
+    JMP_IND = 0x6C, // jump (indirect)
     INY, // increment Y
     LDA, // load accumulator
     JSR, // jump subroutine

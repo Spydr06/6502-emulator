@@ -3,21 +3,27 @@
 
 void emulate(BUS* bus)
 {
-
+    while(emulate_op(bus)) {}
+    printf("-> finished execution\n");
 }
 
-void emulate_op(BUS* bus, uint16_t addr)
+bool emulate_op(BUS* bus)
 {
-    uint8_t instr = bus->ram.bytes[addr];
+    uint8_t instr = bus->ram.bytes[bus->cpu.pc];
     switch(instr)
     {
     case NOP:
+        bus->cpu.pc++;
+        break;
+    case JMP_ABS:
+    case JMP_IND:
+        bus->cpu.pc = bus->ram.bytes[bus->cpu.pc + 1] | bus->ram.bytes[bus->cpu.pc + 2] << 8;
         break;
 
     default:
-        fprintf(stderr, "0x%04x: unknown instruction \"0x%02X\"\n", addr, instr);
-        return;
+        fprintf(stderr, "0x%04x: unknown instruction \"0x%02X\"\n", bus->cpu.pc, instr);
+        return false;
     }
-
-    bus->cpu.pc += INSTR_LEN[instr];
+    bus->cpu.cycles = INSTR_CYCLES[instr];
+    return true;
 }

@@ -38,6 +38,8 @@ typedef struct {
             int d0 :1, d1 :1, d2 :1, d3 :1, d4 :1, d5 :1, d6 :1, d7:1;
         };
     };
+
+    uint64_t cycles;
 } CPU;
 
 typedef enum {
