@@ -1,7 +1,12 @@
 #include <stdio.h>
 
+#include "hardware/bus.h"
+
 int main()
 {
-    printf("hello world\n");
+    BUS system;
+    init_bus(&system);
+
+    hexdump(stdout, &system.ram);
     return 0;
 }
