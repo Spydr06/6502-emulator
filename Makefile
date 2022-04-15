@@ -3,12 +3,16 @@ LD := gcc
 CFLAGS  := -Wall -Wextra
 LDFLAGS := -lm
 
-PROG := bin/6502-emu
+BINDIR := bin
+PROG := $(BINDIR)/6502-emu
 SRCS := $(shell find src -name "*.c")
 OBJS := $(SRCS:.c=.o)
 
 .PHONY: all
-all: $(PROG)
+all: $(BINDIR) $(PROG)
+
+$(BINDIR):
+	mkdir $(BINDIR)
 
 $(PROG): $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
