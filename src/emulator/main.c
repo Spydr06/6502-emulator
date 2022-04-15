@@ -27,8 +27,14 @@ int main()
 
     memcpy(system_bus.ram.bytes, 
         (uint8_t[RAM_SIZE]) {
+            [0x0088] = HLT,
+            [0x1000] = INX,
+            DEY,
+            TXA,
+            JMP_IND, 0x55, 0x44,
+            [0x4455] = 0x88, 0x00,
             [0xfff0] = NOP,
-            [0xfff1] = JMP_ABS, 0xf0, 0xff
+            JMP_ABS, 0x00, 0x10
         }, 
     RAM_SIZE);
 

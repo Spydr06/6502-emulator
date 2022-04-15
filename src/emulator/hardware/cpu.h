@@ -14,13 +14,14 @@ typedef struct {
     union {
         uint8_t status;
         struct {
-            int carry_flag        : 1;
-            int zero_flag         : 1;
-            int interrupt_disable : 1;
-            int decimal_mode      : 1;
-            int break_command     : 1;
-            int overflow_flag     : 1;
-            int negative_flag     : 1;
+            int C :1;
+            int Z :1;
+            int I :1;
+            int D :1;
+            int B :1;
+            int _ :1;
+            int V :1;
+            int N :1;
         };
     };
 
